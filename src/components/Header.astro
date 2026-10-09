@@ -4,6 +4,7 @@ import mark from '~/assets/brand/igds-mark.png';
 import { company, nav } from '~/data/company';
 import Pad from './Pad.astro';
 import Icon from './Icon.astro';
+import { withBase } from '~/lib/url';
 
 interface Props {
   path: string;
@@ -15,7 +16,7 @@ const isCurrent = (href: string) => !href.includes('#') && (path === href || pat
 
 <header class="site-header">
   <div class="board site-header__inner">
-    <a class="brand" href="/" aria-label={`${company.name}, home`}>
+    <a class="brand" href={withBase('/')} aria-label={`${company.name}, home`}>
       <span class="brand__label">
         <Image src={mark} alt="" width={96} height={53} loading="eager" decoding="async" />
       </span>
@@ -27,7 +28,7 @@ const isCurrent = (href: string) => !href.includes('#') && (path === href || pat
         {
           nav.map((item) => (
             <li>
-              <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+              <a href={withBase(item.href)} aria-current={isCurrent(item.href) ? 'page' : undefined}>
                 {item.label}
               </a>
             </li>

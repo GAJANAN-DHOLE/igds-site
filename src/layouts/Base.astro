@@ -4,6 +4,7 @@ import '~/styles/global.css';
 import Header from '~/components/Header.astro';
 import Footer from '~/components/Footer.astro';
 import { company } from '~/data/company';
+import { stripBase, withBase } from '~/lib/url';
 
 interface Props {
   title: string;
@@ -15,8 +16,13 @@ interface Props {
 }
 
 const { title, description, surface = 'board', noindex = false, jsonLd = [] } = Astro.props;
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
-const canonical = new URL(Astro.url.pathname, company.url).href;
+// Routes are compared and canonicalised without the deployment base, so a preview on a
+// sub-path points search engines at the production address.
+const path = stripBase(Astro.url.pathname).replace(/\/$/, '') || '/';
+const canonical = new URL(stripBase(Astro.url.pathname), company.url).href;
+// Anything served from another origin (a github.io preview) stays out of search results.
+const isProduction = Astro.site?.origin === new URL(company.url).origin;
+const hidden = noindex || !isProduction;
 const fullTitle = path === '/' ? title : `${title} | ${company.name}`;
 const ogImage = new URL('/og.png', company.url).href;
 
@@ -51,10 +57,10 @@ const organisation = {
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex" />}
+    {hidden && <meta name="robots" content="noindex" />}
 
-    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" href={withBase('/favicon-32.png')} sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={company.name} />

@@ -1,6 +1,7 @@
 import { getImage } from 'astro:assets';
 import modelManifest from '~/data/models.json';
 import type { Product } from '~/data/products';
+import { withBase } from '~/lib/url';
 
 export type Vec3 = [number, number, number];
 
@@ -140,7 +141,7 @@ export async function benchConfig(product: Product): Promise<BenchConfig> {
   const labels = hotspots.map((hotspot) => hotspot.label.toLowerCase());
   const config: BenchConfig = {
     ...base,
-    src: entry.src,
+    src: withBase(entry.src),
     size: v3(entry.size),
     alt: `Interactive 3D model of the ${product.name}. ${benchMotion.hint} Marked points: ${labels.join(', ') || 'none'}.`,
     note: entry.representative ? 'Representative 3D model. Drag to turn, scroll or pinch to zoom.' : 'Drag to turn, scroll or pinch to zoom.',

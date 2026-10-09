@@ -4,6 +4,7 @@ import lockup from '~/assets/brand/igds-lockup.png';
 import { company, designRules } from '~/data/company';
 import { divisions } from '~/data/divisions';
 import Icon from './Icon.astro';
+import { withBase } from '~/lib/url';
 
 const year = new Date().getFullYear();
 ---
@@ -33,7 +34,7 @@ const year = new Date().getFullYear();
           {
             divisions.map((division) => (
               <li>
-                <a href={`/products#${division.id}`}>{division.name}</a>
+                <a href={withBase(`/products#${division.id}`)}>{division.name}</a>
               </li>
             ))
           }
@@ -43,11 +44,11 @@ const year = new Date().getFullYear();
       <nav aria-label="Company">
         <h2 class="site-footer__title">Company</h2>
         <ul>
-          <li><a href="/services">Services</a></li>
-          <li><a href="/#work">Work</a></li>
-          <li><a href="/#company">About</a></li>
-          <li><a href="/insights">Insights</a></li>
-          <li><a href="/#contact">Contact</a></li>
+          <li><a href={withBase('/services')}>Services</a></li>
+          <li><a href={withBase('/#work')}>Work</a></li>
+          <li><a href={withBase('/#company')}>About</a></li>
+          <li><a href={withBase('/insights')}>Insights</a></li>
+          <li><a href={withBase('/#contact')}>Contact</a></li>
         </ul>
       </nav>
 
@@ -83,7 +84,7 @@ const year = new Date().getFullYear();
 
     <div class="site-footer__base">
       <p class="legend">© {year} IG Drives and Systems</p>
-      <p class="legend"><a href="/legal#privacy">Privacy</a> · <a href="/legal#terms">Terms</a></p>
+      <p class="legend"><a href={withBase('/legal#privacy')}>Privacy</a> · <a href={withBase('/legal#terms')}>Terms</a></p>
     </div>
   </div>
 </footer>

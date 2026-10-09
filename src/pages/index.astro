@@ -8,6 +8,7 @@ import Numeral from '~/components/Numeral.astro';
 import SpecList from '~/components/SpecList.astro';
 import ContactForm from '~/components/ContactForm.astro';
 import { benchConfig } from '~/lib/bench';
+import { withBase } from '~/lib/url';
 import { company, partners, team, mission, vision, reasons, designRules } from '~/data/company';
 import { divisions } from '~/data/divisions';
 import { services } from '~/data/services';
@@ -103,7 +104,7 @@ const briefs = (await getCollection('insights')).sort((a, b) => a.data.order - b
                   {division.capabilities.slice(0, 4).map((item) => <li>{item}</li>)}
                 </ul>
                 {division.note && <p class="div__note">{division.note}</p>}
-                <a class="link" href={`/products#${division.id}`}>
+                <a class="link" href={withBase(`/products#${division.id}`)}>
                   {division.name} products <Icon name="arrow" />
                 </a>
               </article>
@@ -132,7 +133,7 @@ const briefs = (await getCollection('insights')).sort((a, b) => a.data.order - b
               </span>
               <h3>{service.name}</h3>
               <p class="chain__out">{service.output}</p>
-              <a class="link" href={`/services#${service.slug}`}>
+              <a class="link" href={withBase(`/services#${service.slug}`)}>
                 Details <Icon name="arrow" />
               </a>
             </li>
@@ -199,7 +200,7 @@ const briefs = (await getCollection('insights')).sort((a, b) => a.data.order - b
                   <Pad href={`/?product=${product.slug}#contact`} size="small" icon="arrow">
                     Enquire
                   </Pad>
-                  <a class="link" href={`/products#${product.slug}`}>
+                  <a class="link" href={withBase(`/products#${product.slug}`)}>
                     Full specification <Icon name="arrow" />
                   </a>
                 </div>
@@ -235,7 +236,7 @@ const briefs = (await getCollection('insights')).sort((a, b) => a.data.order - b
                 {study.products.map((slug) => {
                   const related = productBySlug(slug);
                   return (
-                    <a class="link" href={`/products#${related.slug}`}>
+                    <a class="link" href={withBase(`/products#${related.slug}`)}>
                       {related.designator} {related.name} <Icon name="arrow" />
                     </a>
                   );
@@ -314,7 +315,7 @@ const briefs = (await getCollection('insights')).sort((a, b) => a.data.order - b
     <div class="board">
       <header class="sect-head">
         <h2 id="insights-title">Short briefs from the bench</h2>
-        <a class="link" href="/insights">All briefs <Icon name="arrow" /></a>
+        <a class="link" href={withBase('/insights')}>All briefs <Icon name="arrow" /></a>
       </header>
       <div class="briefs">
         {
@@ -322,7 +323,7 @@ const briefs = (await getCollection('insights')).sort((a, b) => a.data.order - b
             <div class="brief">
               <span class="legend">B{index + 1}</span>
               <h3 class="brief__title">
-                <a href={`/insights#${brief.id}`}>{brief.data.title}</a>
+                <a href={withBase(`/insights#${brief.id}`)}>{brief.data.title}</a>
               </h3>
               <span class="legend">{brief.data.readMinutes} min</span>
               <p class="brief__summary">{brief.data.summary}</p>

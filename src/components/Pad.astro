@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import type { IconName } from './Icon.astro';
+import { withBase } from '~/lib/url';
 
 interface Props {
   href?: string;
@@ -19,7 +20,7 @@ const external = href?.startsWith('http');
 
 {
   href ? (
-    <a class:list={classes} href={href} {...(external ? { target: '_blank', rel: 'noopener' } : {})} {...rest}>
+    <a class:list={classes} href={withBase(href)} {...(external ? { target: '_blank', rel: 'noopener' } : {})} {...rest}>
       <slot />
       {icon && <Icon name={icon} />}
     </a>
