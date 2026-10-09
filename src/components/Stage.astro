@@ -1,0 +1,54 @@
+---
+import type { BenchConfig } from '~/lib/bench';
+
+interface Props {
+  /** Shared id between this stage, its data and any tabs that drive it. */
+  id: string;
+  configs: BenchConfig[];
+  /** Fixed-height viewport, used where the stage follows the reader. */
+  tall?: boolean;
+  /** Follow the product sections on the page instead of tabs. */
+  follow?: boolean;
+  /** Load straight away instead of when it nears the viewport. */
+  eager?: boolean;
+  /** Open the model a little on first view so the control gets discovered. */
+  tease?: boolean;
+  class?: string;
+}
+
+const { id, configs, tall = false, follow = false, eager = false, tease = false, class: className } = Astro.props;
+const first = configs[0];
+const json = JSON.stringify(configs).replace(/</g, '\\u003c');
+---
+
+<div
+  class:list={['stage', tall && 'stage--tall', className]}
+  data-stage
+  data-bench={id}
+  data-state="loading"
+  data-follow={follow ? '' : undefined}
+  data-eager={eager ? '' : undefined}
+  data-tease={tease ? '' : undefined}
+>
+  <div class="stage__frame">
+    <div class="stage__viewport">
+      <div class="stage__status" aria-live="polite">
+        <div class="stage__pins" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <p data-status>Loading</p>
+      </div>
+    </div>
+    <div class="stage__bar" hidden>
+      <label class="stage__control">
+        <span class="legend" data-scrub-label>Explode</span>
+        <input type="range" min="0" max="1" step="0.005" value="0" data-scrub />
+        <output data-scrub-output>0%</output>
+      </label>
+      <button class="stage__btn" type="button" data-reset>Reset</button>
+    </div>
+  </div>
+  <p class="legend stage__note" data-note>{first?.note}</p>
+  <noscript>
+    {first?.photo && <img class="stage__photo-static" src={first.photo.src} alt={first.photo.alt} width={first.photo.width} height={first.photo.height} />}
+  </noscript>
+  <script type="application/json" data-bench-data={id} set:html={json} />
+</div>

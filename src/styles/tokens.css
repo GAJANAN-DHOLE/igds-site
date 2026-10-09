@@ -1,0 +1,79 @@
+/*
+  The Board: tokens.
+  Matte solder mask owns the surfaces, silkscreen is the type, ENIG gold is the only control colour,
+  copper trace-green carries connections. White-mask panels hold long reading in black silk.
+*/
+:root {
+  /* Solder mask */
+  --mask-950: #071d14;
+  --mask-900: #0a2a1e;
+  --mask-800: #0f3b2a;
+  --mask-700: #14503a;
+  --mask-600: #1c6a4d;
+  --mask-500: #2b8764;
+
+  /* Silkscreen, tinted from the mask so secondary text is never grey */
+  --silk: #f1efe4;
+  --silk-2: #b9cdbf;
+  --silk-3: #86a595;
+  --silk-rule: rgb(241 239 228 / 0.3);
+  --silk-rule-strong: rgb(241 239 228 / 0.55);
+
+  /* ENIG gold */
+  --gold: #d4aa4f;
+  --gold-bright: #e6c474;
+  --gold-deep: #a9832f;
+
+  /* Trace and via */
+  --trace: #4aa883;
+  --trace-hot: #8be0b9;
+
+  /* White mask and black silk */
+  --paper: #f4f2ea;
+  --paper-2: #e8e5d8;
+  --ink: #141a16;
+  --ink-2: #3d4f44;
+  --ink-rule: rgb(20 26 22 / 0.22);
+
+  /* Logo label */
+  --navy: #13294b;
+
+  /* Signal colours, used inside the 3D legends only */
+  --ok: #3fb06a;
+  --fault: #e2574c;
+
+  /* Type */
+  --sans: var(--font-sans, 'Archivo'), 'Helvetica Neue', Arial, sans-serif;
+  --mono: var(--font-mono, 'Martian Mono'), ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --step--2: 0.75rem;
+  --step--1: 0.8125rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: clamp(1.4rem, 1.15rem + 0.9vw, 1.75rem);
+  --step-3: clamp(1.9rem, 1.3rem + 2.4vw, 3.25rem);
+  --step-4: clamp(2.6rem, 1rem + 5.4vw, 5.75rem);
+  --numeral: clamp(3.5rem, 1.5rem + 8vw, 6rem);
+
+  /* Space */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4.5rem;
+  --s-9: clamp(4rem, 3rem + 5vw, 8rem);
+  --gutter: clamp(1rem, 0.4rem + 3vw, 3rem);
+  --measure: 66ch;
+  --board-max: 90rem;
+  --header-h: 4.25rem;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-1: 140ms;
+  --dur-2: 320ms;
+
+  color-scheme: dark;
+}

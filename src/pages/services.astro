@@ -1,0 +1,108 @@
+---
+import { Image } from 'astro:assets';
+import Base from '~/layouts/Base.astro';
+import Pad from '~/components/Pad.astro';
+import { company, designRules } from '~/data/company';
+import { engagements } from '~/data/divisions';
+import { services } from '~/data/services';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `${company.name} engineering services`,
+    itemListElement: services.map((service, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Service',
+        name: service.name,
+        description: service.summary,
+        provider: { '@type': 'Organization', name: company.name, url: company.url },
+        url: `${company.url}/services#${service.slug}`,
+      },
+    })),
+  },
+];
+---
+
+<Base
+  title="Engineering services"
+  description="Research, project engineering, medical device design and manufacturing: embedded hardware, firmware and software, from concept to production."
+  jsonLd={jsonLd}
+>
+  <div class="board">
+    <header class="page-head">
+      <h1>Engineering services for the whole product life</h1>
+      <p class="lede">
+        Four services, in the order a product lives them: concept, design, regulated development and build. Engage us for one step or
+        carry a product through all four.
+      </p>
+    </header>
+
+    {
+      services.map((service) => (
+        <section class="service" id={service.slug} aria-labelledby={`${service.slug}-title`}>
+          <div class="service__lead">
+            <span class="legend">
+              {service.designator} · {service.step}
+            </span>
+            <h2 id={`${service.slug}-title`}>{service.name}</h2>
+            <p class="service__out">{service.output}</p>
+          </div>
+          <div class="service__body">
+            <p class="lede">{service.summary}</p>
+            <div class="service__groups">
+              {service.groups.map((group) => (
+                <div>
+                  <h3 class="legend">{group.title}</h3>
+                  <ul class="ticks">
+                    {group.items.map((item) => <li>{item}</li>)}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            {service.figure && (
+              <figure class="service__figure">
+                <Image src={service.figure.src} alt={service.figure.alt} width={448} loading="lazy" />
+                <figcaption class="legend">{service.figure.caption}</figcaption>
+              </figure>
+            )}
+          </div>
+        </section>
+      ))
+    }
+
+    <section class="section" aria-labelledby="engage-title">
+      <header class="sect-head">
+        <h2 id="engage-title">How we engage</h2>
+        <span class="legend">4 modes</span>
+      </header>
+      <ol class="engage">
+        {
+          engagements.map((item) => (
+            <li>
+              <span class="legend">{item.step}</span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="section" aria-labelledby="practice-title">
+      <header class="sect-head">
+        <h2 id="practice-title">Design practice aligned to</h2>
+        <span class="legend">REF</span>
+      </header>
+      <ul class="ticks cols-3">
+        {designRules.map((rule) => <li><strong>{rule.code}</strong> {rule.label}</li>)}
+      </ul>
+      <div class="bench__actions" style="margin-top: var(--s-7)">
+        <Pad href="/#contact" icon="arrow">Discuss a project</Pad>
+        <a class="link" href={company.phoneHref}>{company.phone}</a>
+      </div>
+    </section>
+  </div>
+</Base>

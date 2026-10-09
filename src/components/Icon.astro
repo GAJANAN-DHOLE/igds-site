@@ -1,0 +1,27 @@
+---
+/** One authored icon set: 24 px grid, 1.75 stroke, square caps. */
+export type IconName = 'arrow' | 'arrow-up-right' | 'phone' | 'mail' | 'menu' | 'close' | 'pin' | 'check' | 'alert' | 'external';
+
+interface Props {
+  name: IconName;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+const paths: Record<IconName, string> = {
+  arrow: 'M4 12h15M13 6l6 6-6 6',
+  'arrow-up-right': 'M7 17 17 7M8 7h9v9',
+  phone: 'M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A15 15 0 0 1 4 5a1 1 0 0 1 1-1z',
+  mail: 'M3 5h18v14H3zM3 6l9 7 9-7',
+  menu: 'M4 7h16M4 12h16M4 17h16',
+  close: 'M6 6l12 12M18 6 6 18',
+  pin: 'M12 21s-6-5.5-6-11a6 6 0 1 1 12 0c0 5.5-6 11-6 11zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z',
+  check: 'M4 12.5 9.5 18 20 6.5',
+  alert: 'M12 3 2 20h20zM12 10v5M12 17.5v.5',
+  external: 'M14 4h6v6M20 4l-9 9M18 14v6H4V6h6',
+};
+---
+
+<svg class:list={['icon', `icon--${name}`, className]} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+  <path d={paths[name]}></path>
+</svg>

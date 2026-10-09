@@ -1,0 +1,18 @@
+---
+import Base from '~/layouts/Base.astro';
+import Pad from '~/components/Pad.astro';
+---
+
+<Base title="Page not found" description="That page is not on this site." noindex>
+  <div class="board">
+    <section class="lost">
+      <h1>That page is not on this board.</h1>
+      <p class="lede">The address may be from the old site or mistyped. Everything we make and do is on two pages.</p>
+      <div class="actions">
+        <Pad href="/products" icon="arrow">Products</Pad>
+        <Pad href="/services" variant="ghost">Services</Pad>
+        <Pad href="/" variant="ghost">Home</Pad>
+      </div>
+    </section>
+  </div>
+</Base>

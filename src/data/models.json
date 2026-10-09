@@ -1,0 +1,1339 @@
+{
+  "mss-starter": {
+    "src": "/models/mss-starter.glb",
+    "representative": true,
+    "motion": {
+      "name": "explode",
+      "kind": "translate",
+      "offsets": {
+        "cover": [
+          0,
+          0.17,
+          0.14
+        ],
+        "board": [
+          0,
+          0.015,
+          0.06
+        ]
+      }
+    },
+    "anchors": {
+      "display": {
+        "position": [
+          0,
+          0.221,
+          0.0555
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "cover"
+      },
+      "keys": {
+        "position": [
+          -0.0025,
+          0.197,
+          0.0565
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "cover"
+      },
+      "faults": {
+        "position": [
+          -0.0395,
+          0.18,
+          0.0545
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "cover"
+      },
+      "switches": {
+        "position": [
+          0,
+          0.104,
+          0.0645
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "cover"
+      },
+      "board": {
+        "position": [
+          0.02,
+          0.18,
+          -0.0025
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "board"
+      },
+      "terminals": {
+        "position": [
+          0,
+          0.019,
+          0.0485
+        ],
+        "normal": [
+          0,
+          0.4,
+          1
+        ]
+      }
+    },
+    "size": [
+      0.256,
+      0.27,
+      0.1198
+    ]
+  },
+  "gsm-starter": {
+    "src": "/models/gsm-starter.glb",
+    "representative": true,
+    "motion": {
+      "name": "explode",
+      "kind": "translate",
+      "offsets": {
+        "cover": [
+          0,
+          0.17,
+          0.14
+        ],
+        "board": [
+          0,
+          0.015,
+          0.06
+        ]
+      }
+    },
+    "anchors": {
+      "display": {
+        "position": [
+          0,
+          0.221,
+          0.0555
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "cover"
+      },
+      "keys": {
+        "position": [
+          -0.0025,
+          0.197,
+          0.0565
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "cover"
+      },
+      "faults": {
+        "position": [
+          -0.0395,
+          0.18,
+          0.0545
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "cover"
+      },
+      "switches": {
+        "position": [
+          0,
+          0.104,
+          0.0645
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "cover"
+      },
+      "board": {
+        "position": [
+          0.02,
+          0.18,
+          -0.0025
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "board"
+      },
+      "terminals": {
+        "position": [
+          0,
+          0.019,
+          0.0485
+        ],
+        "normal": [
+          0,
+          0.4,
+          1
+        ]
+      },
+      "antenna": {
+        "position": [
+          -0.117,
+          0.265,
+          -0.012
+        ],
+        "normal": [
+          -1,
+          0,
+          0.4
+        ]
+      }
+    },
+    "size": [
+      0.256,
+      0.3191,
+      0.1198
+    ]
+  },
+  "cyclic-timer": {
+    "src": "/models/cyclic-timer.glb",
+    "representative": true,
+    "motion": {
+      "name": "explode",
+      "kind": "translate",
+      "offsets": {
+        "cover": [
+          0,
+          0.17,
+          0.14
+        ],
+        "board": [
+          0,
+          0.015,
+          0.06
+        ]
+      }
+    },
+    "anchors": {
+      "display": {
+        "position": [
+          0,
+          0.221,
+          0.0555
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "cover"
+      },
+      "keys": {
+        "position": [
+          -0.0025,
+          0.197,
+          0.0565
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "cover"
+      },
+      "faults": {
+        "position": [
+          -0.0395,
+          0.18,
+          0.0545
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "cover"
+      },
+      "switches": {
+        "position": [
+          0,
+          0.104,
+          0.0645
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "cover"
+      },
+      "board": {
+        "position": [
+          0.02,
+          0.18,
+          -0.0025
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "board"
+      },
+      "terminals": {
+        "position": [
+          0,
+          0.019,
+          0.0485
+        ],
+        "normal": [
+          0,
+          0.4,
+          1
+        ]
+      }
+    },
+    "size": [
+      0.256,
+      0.27,
+      0.1198
+    ]
+  },
+  "agriauto": {
+    "src": "/models/agriauto.glb",
+    "representative": true,
+    "motion": {
+      "name": "explode",
+      "kind": "translate",
+      "offsets": {
+        "cover": [
+          0,
+          0.17,
+          0.14
+        ],
+        "board": [
+          0,
+          0.015,
+          0.06
+        ]
+      }
+    },
+    "anchors": {
+      "display": {
+        "position": [
+          0,
+          0.221,
+          0.0555
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "cover"
+      },
+      "keys": {
+        "position": [
+          -0.0025,
+          0.197,
+          0.0565
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "cover"
+      },
+      "faults": {
+        "position": [
+          -0.0395,
+          0.18,
+          0.0545
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "cover"
+      },
+      "switches": {
+        "position": [
+          0,
+          0.104,
+          0.0645
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "cover"
+      },
+      "board": {
+        "position": [
+          0.02,
+          0.18,
+          -0.0025
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "board"
+      },
+      "glands": {
+        "position": [
+          0,
+          0.01,
+          0.02
+        ],
+        "normal": [
+          0,
+          -0.3,
+          1
+        ]
+      },
+      "clamps": {
+        "position": [
+          0.155,
+          0.01,
+          0.06
+        ],
+        "normal": [
+          0.3,
+          0,
+          1
+        ]
+      },
+      "antenna": {
+        "position": [
+          -0.117,
+          0.265,
+          -0.012
+        ],
+        "normal": [
+          -1,
+          0,
+          0.4
+        ]
+      }
+    },
+    "size": [
+      0.3695,
+      0.3669,
+      0.1774
+    ]
+  },
+  "single-phase-starter": {
+    "src": "/models/single-phase-starter.glb",
+    "representative": true,
+    "motion": {
+      "name": "explode",
+      "kind": "translate",
+      "offsets": {
+        "lid": [
+          0,
+          0.13,
+          0
+        ],
+        "internals": [
+          0,
+          0.06,
+          0
+        ]
+      }
+    },
+    "anchors": {
+      "display": {
+        "position": [
+          0.03,
+          0.125,
+          -0.054
+        ],
+        "normal": [
+          0,
+          1,
+          0.3
+        ],
+        "part": "lid"
+      },
+      "button": {
+        "position": [
+          -0.03,
+          0.138,
+          0.042
+        ],
+        "normal": [
+          0,
+          1,
+          0.4
+        ],
+        "part": "lid"
+      },
+      "knob": {
+        "position": [
+          0.114,
+          0.135,
+          -0.02
+        ],
+        "normal": [
+          0,
+          1,
+          0.3
+        ],
+        "part": "lid"
+      },
+      "level": {
+        "position": [
+          -0.05,
+          0.124,
+          -0.04
+        ],
+        "normal": [
+          0,
+          1,
+          0.3
+        ],
+        "part": "lid"
+      },
+      "mode": {
+        "position": [
+          0.046,
+          0.128,
+          0.05
+        ],
+        "normal": [
+          0,
+          1,
+          0.4
+        ],
+        "part": "lid"
+      },
+      "capacitors": {
+        "position": [
+          -0.07,
+          0.076,
+          -0.04
+        ],
+        "normal": [
+          0,
+          1,
+          0.5
+        ],
+        "part": "internals"
+      },
+      "terminals": {
+        "position": [
+          0.03,
+          0.036,
+          0.1225
+        ],
+        "normal": [
+          0,
+          0.2,
+          1
+        ]
+      }
+    },
+    "size": [
+      0.35,
+      0.137,
+      0.2261
+    ]
+  },
+  "mss-pro": {
+    "src": "/models/mss-pro.glb",
+    "representative": true,
+    "motion": {
+      "name": "explode",
+      "kind": "translate",
+      "offsets": {
+        "front": [
+          0,
+          0.06,
+          0.17
+        ],
+        "boards": [
+          0,
+          0.02,
+          0.1
+        ]
+      }
+    },
+    "anchors": {
+      "lcd": {
+        "position": [
+          0.004,
+          0.117,
+          0.0724
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "front"
+      },
+      "keypad": {
+        "position": [
+          0.04,
+          0.065,
+          0.0754
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "front"
+      },
+      "faults": {
+        "position": [
+          -0.0275,
+          0.067,
+          0.0714
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "front"
+      },
+      "modbus": {
+        "position": [
+          0.03,
+          0.042,
+          -0.073
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "fins": {
+        "position": [
+          0.076,
+          0.107,
+          0.02
+        ],
+        "normal": [
+          1,
+          0,
+          0
+        ]
+      },
+      "boards": {
+        "position": [
+          0,
+          0.117,
+          0.06
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "boards"
+      }
+    },
+    "size": [
+      0.152,
+      0.169,
+      0.1477
+    ]
+  },
+  "air-cooler-controller": {
+    "src": "/models/air-cooler-controller.glb",
+    "representative": true,
+    "motion": {
+      "name": "explode",
+      "kind": "translate",
+      "offsets": {
+        "lid": [
+          0,
+          0.13,
+          0.12
+        ],
+        "internals": [
+          0,
+          0.015,
+          0.05
+        ]
+      }
+    },
+    "anchors": {
+      "display": {
+        "position": [
+          -0.01,
+          0.177,
+          0.049
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "lid"
+      },
+      "keys": {
+        "position": [
+          0,
+          0.115,
+          0.0518
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "lid"
+      },
+      "power": {
+        "position": [
+          -0.0225,
+          0.073,
+          0.0628
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "lid"
+      },
+      "mode": {
+        "position": [
+          0.05,
+          0.073,
+          0.0608
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "lid"
+      },
+      "status": {
+        "position": [
+          0,
+          0.145,
+          0.0488
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "lid"
+      },
+      "glands": {
+        "position": [
+          0,
+          -0.015,
+          -0.005
+        ],
+        "normal": [
+          0,
+          -0.4,
+          1
+        ]
+      },
+      "internals": {
+        "position": [
+          -0.02,
+          0.145,
+          0.02
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "internals"
+      }
+    },
+    "size": [
+      0.207,
+      0.2535,
+      0.1046
+    ]
+  },
+  "i2hd": {
+    "src": "/models/i2hd.glb",
+    "representative": true,
+    "motion": {
+      "name": "explode",
+      "kind": "translate",
+      "offsets": {
+        "cover": [
+          0,
+          0.13,
+          0
+        ],
+        "fan": [
+          0,
+          0.1,
+          0
+        ],
+        "heatsink": [
+          0,
+          0.072,
+          0
+        ],
+        "module": [
+          0,
+          0.042,
+          0
+        ],
+        "ssd": [
+          0,
+          0.03,
+          0.012
+        ],
+        "card": [
+          0,
+          0.03,
+          -0.006
+        ],
+        "board": [
+          0,
+          0.012,
+          0
+        ]
+      }
+    },
+    "anchors": {
+      "keys": {
+        "position": [
+          -0.04,
+          0.025,
+          0.067
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ]
+      },
+      "footswitch": {
+        "position": [
+          0.012,
+          0.025,
+          0.067
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ]
+      },
+      "audio": {
+        "position": [
+          0.045,
+          0.025,
+          0.067
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ]
+      },
+      "hdmiIn": {
+        "position": [
+          -0.071,
+          0.015,
+          -0.066
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "hdmiOut": {
+        "position": [
+          -0.0035,
+          0.015,
+          -0.066
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "lan": {
+        "position": [
+          0.035,
+          0.017,
+          -0.066
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "module": {
+        "position": [
+          -0.0475,
+          0.019,
+          0.004
+        ],
+        "normal": [
+          -0.3,
+          1,
+          0.6
+        ],
+        "part": "module"
+      },
+      "ssd": {
+        "position": [
+          0.056,
+          0.017,
+          0.023
+        ],
+        "normal": [
+          0,
+          1,
+          0.4
+        ],
+        "part": "ssd"
+      },
+      "board": {
+        "position": [
+          0.03,
+          0.011,
+          0
+        ],
+        "normal": [
+          0,
+          1,
+          0.5
+        ],
+        "part": "board"
+      }
+    },
+    "size": [
+      0.2152,
+      0.0662,
+      0.1309
+    ]
+  },
+  "carrier-board": {
+    "src": "/models/carrier-board.glb",
+    "representative": true,
+    "motion": {
+      "name": "explode",
+      "kind": "translate",
+      "offsets": {
+        "fan": [
+          0,
+          0.085,
+          0
+        ],
+        "heatsink": [
+          0,
+          0.058,
+          0
+        ],
+        "module": [
+          0,
+          0.03,
+          0
+        ],
+        "ssd": [
+          0,
+          0.022,
+          0.012
+        ],
+        "card": [
+          0,
+          0.022,
+          -0.006
+        ]
+      }
+    },
+    "anchors": {
+      "csi": {
+        "position": [
+          -0.0915,
+          0.006,
+          0
+        ],
+        "normal": [
+          -0.6,
+          1,
+          0
+        ]
+      },
+      "gpio": {
+        "position": [
+          -0.05,
+          0.008,
+          0.0445
+        ],
+        "normal": [
+          0,
+          1,
+          0.6
+        ]
+      },
+      "usb": {
+        "position": [
+          -0.0225,
+          0.01,
+          -0.044
+        ],
+        "normal": [
+          0,
+          0.6,
+          -1
+        ]
+      },
+      "ethernet": {
+        "position": [
+          0.035,
+          0.016,
+          -0.04
+        ],
+        "normal": [
+          0,
+          0.6,
+          -1
+        ]
+      },
+      "hdmi": {
+        "position": [
+          -0.071,
+          0.009,
+          -0.045
+        ],
+        "normal": [
+          0,
+          0.6,
+          -1
+        ]
+      },
+      "buttons": {
+        "position": [
+          0.0755,
+          0.006,
+          0.0425
+        ],
+        "normal": [
+          0,
+          1,
+          0.6
+        ]
+      },
+      "m2": {
+        "position": [
+          0.056,
+          0.008,
+          0.035
+        ],
+        "normal": [
+          0,
+          1,
+          0.4
+        ],
+        "part": "ssd"
+      },
+      "minipcie": {
+        "position": [
+          0.0765,
+          0.011,
+          -0.017
+        ],
+        "normal": [
+          0,
+          1,
+          0.3
+        ],
+        "part": "card"
+      },
+      "module": {
+        "position": [
+          -0.0475,
+          0.01,
+          0.016
+        ],
+        "normal": [
+          -0.3,
+          1,
+          0.6
+        ],
+        "part": "module"
+      }
+    },
+    "size": [
+      0.2,
+      0.0455,
+      0.1027
+    ]
+  },
+  "mri-detector": {
+    "src": "/models/mri-detector.glb",
+    "representative": true,
+    "motion": {
+      "name": "explode",
+      "kind": "translate",
+      "offsets": {
+        "shellL": [
+          -0.38,
+          0,
+          0
+        ],
+        "shellR": [
+          0.38,
+          0,
+          0
+        ]
+      }
+    },
+    "anchors": {
+      "pillars": {
+        "position": [
+          -0.76,
+          1.1,
+          0.22
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "shellL"
+      },
+      "leds": {
+        "position": [
+          0.76,
+          0.95,
+          0.22
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "shellR"
+      },
+      "beacon": {
+        "position": [
+          0.76,
+          2.03,
+          0.15
+        ],
+        "normal": [
+          0,
+          1,
+          0.3
+        ],
+        "part": "shellR"
+      },
+      "sensors": {
+        "position": [
+          -0.76,
+          0.9,
+          0.17
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "sensors"
+      },
+      "status": {
+        "position": [
+          0,
+          2.26,
+          0.118
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ]
+      },
+      "interlock": {
+        "position": [
+          -1.35,
+          1.25,
+          0.116
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ]
+      },
+      "zone": {
+        "position": [
+          0,
+          0.01,
+          1
+        ],
+        "normal": [
+          0,
+          1,
+          0.4
+        ]
+      }
+    },
+    "size": [
+      3.8,
+      2.42,
+      2.4
+    ]
+  },
+  "mammography": {
+    "src": "/models/mammography.glb",
+    "representative": true,
+    "motion": {
+      "name": "rotate",
+      "kind": "rotate",
+      "part": "carm",
+      "pivot": [
+        0,
+        1.25,
+        0.22
+      ],
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "from": -45,
+      "to": 45
+    },
+    "anchors": {
+      "tube": {
+        "position": [
+          0,
+          1.68,
+          0.64
+        ],
+        "normal": [
+          0,
+          0.3,
+          1
+        ],
+        "part": "carm"
+      },
+      "paddle": {
+        "position": [
+          0,
+          1.08,
+          0.58
+        ],
+        "normal": [
+          0,
+          1,
+          0.4
+        ],
+        "part": "carm"
+      },
+      "detector": {
+        "position": [
+          0.12,
+          0.95,
+          0.58
+        ],
+        "normal": [
+          0,
+          1,
+          0.3
+        ],
+        "part": "carm"
+      },
+      "grips": {
+        "position": [
+          0.19,
+          1.07,
+          0.31
+        ],
+        "normal": [
+          1,
+          0,
+          0.4
+        ],
+        "part": "carm"
+      },
+      "panel": {
+        "position": [
+          0,
+          1.39,
+          0.315
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "part": "carm"
+      },
+      "workstation": {
+        "position": [
+          1.15,
+          1.04,
+          0.16
+        ],
+        "normal": [
+          0,
+          0.2,
+          1
+        ]
+      },
+      "generator": {
+        "position": [
+          -1.05,
+          0.78,
+          0.23
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "size": [
+      3.4,
+      1.785,
+      2
+    ]
+  }
+}

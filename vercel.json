@@ -1,0 +1,206 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/:path(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.igdrives.com"
+        }
+      ],
+      "destination": "https://igdrives.com/:path",
+      "permanent": true
+    },
+    {
+      "source": "/about.php",
+      "destination": "/#company",
+      "permanent": true
+    },
+    {
+      "source": "/contact.php",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/case-study.php",
+      "destination": "/#work",
+      "permanent": true
+    },
+    {
+      "source": "/products.php",
+      "destination": "/products",
+      "permanent": true
+    },
+    {
+      "source": "/products/medical-healthcare-division.php",
+      "destination": "/products#medical",
+      "permanent": true
+    },
+    {
+      "source": "/products/industrial.php",
+      "destination": "/products#industrial",
+      "permanent": true
+    },
+    {
+      "source": "/products/agriculture.php",
+      "destination": "/products#agricultural",
+      "permanent": true
+    },
+    {
+      "source": "/products/electrical-and-switch-gear-division.php",
+      "destination": "/products",
+      "permanent": true
+    },
+    {
+      "source": "/products/neoedge-ot-video.php",
+      "destination": "/products#recorder-streamer",
+      "permanent": true
+    },
+    {
+      "source": "/products/medical-imaging-software.php",
+      "destination": "/products#radiology-software",
+      "permanent": true
+    },
+    {
+      "source": "/products/analog-mammography-control.php",
+      "destination": "/products#analog-mammography",
+      "permanent": true
+    },
+    {
+      "source": "/products/digital-mammography-2d.php",
+      "destination": "/products#digital-mammography",
+      "permanent": true
+    },
+    {
+      "source": "/products/mri-ferromagnetic-detection.php",
+      "destination": "/products#mri-detector",
+      "permanent": true
+    },
+    {
+      "source": "/products/industrial-pc.php",
+      "destination": "/products#i2hd",
+      "permanent": true
+    },
+    {
+      "source": "/products/jetson-carrier-board.php",
+      "destination": "/products#carrier-board",
+      "permanent": true
+    },
+    {
+      "source": "/products/mss-starter.php",
+      "destination": "/products#mss-starter",
+      "permanent": true
+    },
+    {
+      "source": "/products/mss-pro.php",
+      "destination": "/products#mss-pro",
+      "permanent": true
+    },
+    {
+      "source": "/products/industrial-air-cooler-controller.php",
+      "destination": "/products#air-cooler-controller",
+      "permanent": true
+    },
+    {
+      "source": "/products/gsm-starter.php",
+      "destination": "/products#gsm-starter",
+      "permanent": true
+    },
+    {
+      "source": "/products/cyclic-timer.php",
+      "destination": "/products#cyclic-timer",
+      "permanent": true
+    },
+    {
+      "source": "/products/agriauto.php",
+      "destination": "/products#agriauto",
+      "permanent": true
+    },
+    {
+      "source": "/products/single-phase-starter.php",
+      "destination": "/products#single-phase-starter",
+      "permanent": true
+    },
+    {
+      "source": "/services.php",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/services/product-research-and-ip-services.php",
+      "destination": "/services#research-and-ip",
+      "permanent": true
+    },
+    {
+      "source": "/services/project-engineering-services.php",
+      "destination": "/services#project-engineering",
+      "permanent": true
+    },
+    {
+      "source": "/services/medical-and-health-services.php",
+      "destination": "/services#medical-device-design",
+      "permanent": true
+    },
+    {
+      "source": "/services/manufacturing-and-testing-services.php",
+      "destination": "/services#manufacturing-and-testing",
+      "permanent": true
+    },
+    {
+      "source": "/blog.php",
+      "destination": "/insights",
+      "permanent": true
+    },
+    {
+      "source": "/blog/software-reliability-medical-devices.php",
+      "destination": "/insights#software-reliability-medical-devices",
+      "permanent": true
+    },
+    {
+      "source": "/blog/what-is-dicom.php",
+      "destination": "/insights#what-is-dicom",
+      "permanent": true
+    },
+    {
+      "source": "/blog/dicom-vs-dicomweb.php",
+      "destination": "/insights#dicom-vs-dicomweb",
+      "permanent": true
+    },
+    {
+      "source": "/blog/analog-vs-digital-mammography.php",
+      "destination": "/insights#analog-vs-digital-mammography",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ferromagnetic-detection-mri-safety.php",
+      "destination": "/insights#ferromagnetic-detection-mri-safety",
+      "permanent": true
+    },
+    {
+      "source": "/blog/choosing-agricultural-motor-starter.php",
+      "destination": "/insights#choosing-agricultural-motor-starter",
+      "permanent": true
+    },
+    {
+      "source": "/blog/single-phase-vs-three-phase-starters.php",
+      "destination": "/insights#single-phase-vs-three-phase-starters",
+      "permanent": true
+    },
+    {
+      "source": "/blog/automatic-pump-control-irrigation.php",
+      "destination": "/insights#automatic-pump-control-irrigation",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy.php",
+      "destination": "/legal#privacy",
+      "permanent": true
+    },
+    {
+      "source": "/terms-of-service.php",
+      "destination": "/legal#terms",
+      "permanent": true
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+---
+import Base from '~/layouts/Base.astro';
+import { company } from '~/data/company';
+import { legal, legalUpdated } from '~/data/legal';
+---
+
+<Base
+  title="Privacy policy and terms of use"
+  description="How IG Drives & Systems handles the information you send us, and the terms for using this website."
+  surface="paper"
+>
+  <div class="board">
+    <header class="page-head">
+      <h1>Privacy policy and terms of use</h1>
+      <p class="lede">Last updated {legalUpdated}. Questions about either document: <a href={`mailto:${company.email}`}>{company.email}</a>.</p>
+    </header>
+
+    {
+      legal.map((doc) => (
+        <section class="legal-doc" id={doc.id} aria-labelledby={`${doc.id}-title`}>
+          <h2 id={`${doc.id}-title`}>{doc.title}</h2>
+          <div class="prose">
+            <p class="lede">{doc.intro}</p>
+            {doc.sections.map((section) => (
+              <>
+                <h3>{section.heading}</h3>
+                {section.body.map((paragraph) => <p>{paragraph}</p>)}
+                {section.list && <ul>{section.list.map((item) => <li>{item}</li>)}</ul>}
+              </>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </div>
+</Base>

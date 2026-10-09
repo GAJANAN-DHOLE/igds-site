@@ -1,0 +1,17 @@
+---
+interface Props {
+  value: string;
+  unit: string;
+  caption?: string;
+}
+
+const { value, unit, caption } = Astro.props;
+---
+
+<div class="numeral">
+  <p class="numeral__figure">
+    <span>{value}</span>
+    <span class="numeral__unit">{unit}</span>
+  </p>
+  {caption && <p class="numeral__caption">{caption}</p>}
+</div>

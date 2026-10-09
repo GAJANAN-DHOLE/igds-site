@@ -1,0 +1,265 @@
+---
+import { Image } from 'astro:assets';
+import mark from '~/assets/brand/igds-mark.png';
+import { company, nav } from '~/data/company';
+import Pad from './Pad.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  path: string;
+}
+
+const { path } = Astro.props;
+const isCurrent = (href: string) => !href.includes('#') && (path === href || path.startsWith(`${href}/`));
+---
+
+<header class="site-header">
+  <div class="board site-header__inner">
+    <a class="brand" href="/" aria-label={`${company.name}, home`}>
+      <span class="brand__label">
+        <Image src={mark} alt="" width={96} height={53} loading="eager" decoding="async" />
+      </span>
+      <span class="brand__name">IG Drives<span> &amp; Systems</span></span>
+    </a>
+
+    <nav id="site-nav" class="nav" aria-label="Primary">
+      <ul>
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="nav__phone legend" href={company.phoneHref}>
+        <Icon name="phone" />
+        {company.phone}
+      </a>
+    </nav>
+
+    <div class="site-header__actions">
+      <Pad href="/#contact" size="small" icon="arrow">Enquire</Pad>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
+        <span class="sr-only">Menu</span>
+        <Icon name="menu" class="menu-toggle__open" />
+        <Icon name="close" class="menu-toggle__close" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--mask-900);
+    border-bottom: 1px solid var(--silk-rule-strong);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+    min-height: var(--header-h);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    text-decoration: none;
+    flex: none;
+  }
+
+  /* The logo sits on a white label, the way a part number is printed on a white patch. */
+  .brand__label {
+    display: grid;
+    place-items: center;
+    width: 4.4rem;
+    height: 2.9rem;
+    padding: 0.3rem 0.45rem;
+    background: #fff;
+  }
+
+  .brand__label :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .brand__name {
+    font-weight: 700;
+    font-stretch: 108%;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    color: var(--silk);
+  }
+
+  .brand__name span {
+    color: var(--silk-2);
+    font-weight: 500;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+    margin-left: auto;
+  }
+
+  .nav ul {
+    display: flex;
+    gap: var(--s-5);
+  }
+
+  .nav ul a {
+    display: inline-block;
+    padding-block: var(--s-3);
+    text-decoration: none;
+    color: var(--silk-2);
+    font-weight: 560;
+    font-stretch: 104%;
+    border-bottom: 2px solid transparent;
+    transition: color var(--dur-1) var(--ease-out), border-color var(--dur-1) var(--ease-out);
+  }
+
+  .nav ul a:hover {
+    color: var(--silk);
+    border-bottom-color: var(--gold);
+  }
+
+  .nav ul a[aria-current='page'] {
+    color: var(--silk);
+    border-bottom-color: var(--gold);
+  }
+
+  .nav__phone {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    text-decoration: none;
+    color: var(--silk);
+    letter-spacing: 0.02em;
+    text-transform: none;
+    white-space: nowrap;
+  }
+
+  .nav__phone :global(.icon) {
+    color: var(--gold);
+  }
+
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+  }
+
+  .menu-toggle {
+    display: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    padding: 0;
+    border: 1px solid var(--silk-rule-strong);
+    background: transparent;
+    color: var(--silk);
+  }
+
+  .menu-toggle :global(.menu-toggle__close) {
+    display: none;
+  }
+
+  .menu-toggle[aria-expanded='true'] :global(.menu-toggle__open) {
+    display: none;
+  }
+
+  .menu-toggle[aria-expanded='true'] :global(.menu-toggle__close) {
+    display: block;
+  }
+
+  @media (max-width: 62rem) {
+    .site-header__inner {
+      gap: var(--s-4);
+    }
+
+    .site-header__actions {
+      margin-left: auto;
+    }
+
+    .menu-toggle {
+      display: grid;
+    }
+
+    .brand__name {
+      display: none;
+    }
+
+    :global(html.js) .nav {
+      display: none;
+    }
+
+    :global(html.js) .nav.is-open {
+      display: grid;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      gap: var(--s-4);
+      padding: var(--s-4) var(--gutter) var(--s-6);
+      background: var(--mask-900);
+      border-bottom: 1px solid var(--silk-rule-strong);
+      max-height: calc(100dvh - var(--header-h));
+      overflow-y: auto;
+    }
+
+    .nav {
+      flex-wrap: wrap;
+      margin-left: 0;
+    }
+
+    .nav ul {
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
+    }
+
+    .nav ul a {
+      display: block;
+      padding-block: var(--s-3);
+      font-size: 1.25rem;
+      border-bottom: 1px solid var(--silk-rule);
+    }
+  }
+
+  @media (min-width: 40rem) and (max-width: 62rem) {
+    .brand__name {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const nav = document.getElementById('site-nav');
+  if (toggle && nav) {
+    const set = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      nav.classList.toggle('is-open', open);
+    };
+    toggle.addEventListener('click', () => set(toggle.getAttribute('aria-expanded') !== 'true'));
+    nav.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).closest('a')) set(false);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        set(false);
+        toggle.focus();
+      }
+    });
+  }
+</script>

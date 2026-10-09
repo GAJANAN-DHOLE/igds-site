@@ -1,0 +1,139 @@
+---
+import { PUBLIC_FORM_ENDPOINT } from 'astro:env/client';
+import Pad from './Pad.astro';
+import { company } from '~/data/company';
+import { products } from '~/data/products';
+
+const endpoint = PUBLIC_FORM_ENDPOINT?.trim() || '';
+const action = endpoint || `mailto:${company.email}`;
+---
+
+<form
+  class="form"
+  data-contact
+  data-endpoint={endpoint}
+  data-email={company.email}
+  method="post"
+  action={action}
+  enctype={endpoint ? undefined : 'text/plain'}
+>
+  <div class="form__row">
+    <label>
+      <span>Name</span>
+      <input name="name" type="text" autocomplete="name" required />
+    </label>
+    <label>
+      <span>Email</span>
+      <input name="email" type="email" autocomplete="email" required />
+    </label>
+  </div>
+
+  <div class="form__row">
+    <label>
+      <span>Organisation <span class="opt">(optional)</span></span>
+      <input name="organisation" type="text" autocomplete="organization" />
+    </label>
+    <label>
+      <span>Phone <span class="opt">(optional)</span></span>
+      <input name="phone" type="tel" autocomplete="tel" />
+    </label>
+  </div>
+
+  <div class="form__row">
+    <label>
+      <span>This is about</span>
+      <select name="topic">
+        <option value="Product enquiry">Buying a product</option>
+        <option value="Engineering project">An engineering project</option>
+        <option value="Something else">Something else</option>
+      </select>
+    </label>
+    <label>
+      <span>Product <span class="opt">(optional)</span></span>
+      <select name="product" data-product>
+        <option value="">Not product specific</option>
+        {products.map((product) => <option value={product.slug}>{product.designator} {product.name}</option>)}
+      </select>
+    </label>
+  </div>
+
+  <label>
+    <span>Message</span>
+    <textarea name="message" required placeholder="What are you building, and what do you need from us?"></textarea>
+  </label>
+
+  <div class="hp" aria-hidden="true">
+    <label><span>Leave this empty</span> <input name="_gotcha" type="text" tabindex="-1" autocomplete="off" /></label>
+  </div>
+
+  <div class="form__foot">
+    <Pad type="submit" icon="arrow">Send message</Pad>
+    <p class="form__status" role="status" aria-live="polite" data-status></p>
+  </div>
+</form>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('form[data-contact]');
+
+  if (form) {
+    const endpoint = form.dataset['endpoint'] ?? '';
+    const email = form.dataset['email'] ?? '';
+    const status = form.querySelector<HTMLElement>('[data-status]');
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const select = form.querySelector<HTMLSelectElement>('[data-product]');
+
+    const say = (text: string, tone: 'ok' | 'error' | '' = ''): void => {
+      if (!status) return;
+      status.textContent = text;
+      status.dataset['tone'] = tone;
+    };
+
+    // A product page links here with ?product=slug; pre-select it.
+    const wanted = new URLSearchParams(location.search).get('product');
+    if (wanted && select && Array.from(select.options).some((option) => option.value === wanted)) select.value = wanted;
+
+    const compose = (data: FormData): string => {
+      const field = (name: string): string => String(data.get(name) ?? '').trim();
+      const product = select?.selectedOptions[0]?.textContent?.trim();
+      const details = [
+        `Name: ${field('name')}`,
+        field('organisation') ? `Organisation: ${field('organisation')}` : '',
+        field('phone') ? `Phone: ${field('phone')}` : '',
+        product && field('product') ? `Product: ${product}` : '',
+      ].filter((line) => line !== '');
+      return `${field('message')}\n\n${details.join('\n')}`;
+    };
+
+    const mailto = (data: FormData): string => {
+      const subject = `${String(data.get('topic') ?? 'Enquiry')}: ${String(data.get('name') ?? '')}`;
+      return `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(compose(data))}`;
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const data = new FormData(form);
+      if (String(data.get('_gotcha') ?? '') !== '') return; // a bot filled the trap field
+
+      if (!endpoint) {
+        say('Your email app should open with the message ready. If it does not, write to ' + email + '.', 'ok');
+        location.href = mailto(data);
+        return;
+      }
+
+      if (submit?.getAttribute('aria-disabled') === 'true') return;
+      submit?.setAttribute('aria-disabled', 'true');
+      say('Sending…');
+      try {
+        const response = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        if (!response.ok) throw new Error(String(response.status));
+        form.reset();
+        say('Thank you. Your message has been sent and we will reply by email.', 'ok');
+      } catch {
+        say(`The message did not send. Please email ${email} instead.`, 'error');
+      } finally {
+        submit?.removeAttribute('aria-disabled');
+      }
+    });
+  }
+</script>

@@ -1,0 +1,378 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '~/layouts/Base.astro';
+import Pad from '~/components/Pad.astro';
+import Icon from '~/components/Icon.astro';
+import Stage from '~/components/Stage.astro';
+import Numeral from '~/components/Numeral.astro';
+import SpecList from '~/components/SpecList.astro';
+import ContactForm from '~/components/ContactForm.astro';
+import { benchConfig } from '~/lib/bench';
+import { company, partners, team, mission, vision, reasons, designRules } from '~/data/company';
+import { divisions } from '~/data/divisions';
+import { services } from '~/data/services';
+import { cases } from '~/data/cases';
+import { productBySlug } from '~/data/products';
+
+const heroProduct = productBySlug('i2hd');
+const hero = await benchConfig(heroProduct);
+
+const featuredSlugs = ['digital-mammography', 'mri-detector', 'carrier-board', 'mss-pro', 'gsm-starter', 'single-phase-starter'];
+const featured = featuredSlugs.map((slug) => productBySlug(slug));
+const benchConfigs = await Promise.all(featured.map((product) => benchConfig(product)));
+
+const briefs = (await getCollection('insights')).sort((a, b) => a.data.order - b.data.order).slice(0, 3);
+---
+
+<Base
+  title="Embedded systems for medical imaging, industry and agriculture"
+  description={company.description}
+>
+  <!-- ───────────── Hero ───────────── -->
+  <section class="hero" data-traces-host aria-labelledby="hero-title">
+    <svg class="trace-layer" data-traces aria-hidden="true"></svg>
+    <div class="board">
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <h1 id="hero-title">Embedded systems, built end to end.</h1>
+          <p class="lede">
+            IG Drives &amp; Systems designs the electronics, firmware and software, then builds and tests the product. Medical imaging
+            systems, industrial motor control and agricultural starters, from Pune.
+          </p>
+          <div class="hero__actions">
+            <Pad href="/#contact" icon="arrow" data-trace-pad>Discuss a project</Pad>
+            <Pad href="/products" variant="ghost" data-trace-pad>See the products</Pad>
+            <a class="link" href={company.phoneHref} data-trace-pad><Icon name="phone" />{company.phone}</a>
+          </div>
+        </div>
+
+        <div class="hero__footprint courtyard" data-trace-port>
+          <span class="legend courtyard__ref">{heroProduct.designator} {heroProduct.name}</span>
+          <Stage id="hero" configs={[hero]} eager tease />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── Partners ───────────── -->
+  <div class="board">
+    <div class="partners">
+      <p class="legend">Technology partners</p>
+      {
+        partners.map((partner) => (
+          <a class="partners__item" href={partner.href} target="_blank" rel="noopener">
+            <span class="partners__name">{partner.name}</span>
+            <span class="legend">{partner.role}</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- ───────────── Divisions ───────────── -->
+  <section class="section" id="divisions" aria-labelledby="divisions-title">
+    <div class="board">
+      <header class="sect-head">
+        <h2 id="divisions-title">Three product lines, one engineering team</h2>
+        <span class="legend">DIV-M · DIV-I · DIV-A</span>
+      </header>
+
+      <div class="divs">
+        {
+          divisions.map((division) => {
+            const [lead, ...rest] = division.figures;
+            return (
+              <article class="div courtyard" id={`div-${division.id}`}>
+                <span class="legend courtyard__ref">{division.designator}</span>
+                <header class="div__head">
+                  <h3>{division.name}</h3>
+                </header>
+                {lead && <Numeral value={lead.value} unit={lead.unit} caption={lead.label} />}
+                <p class="div__line">{division.line}</p>
+                <dl class="spec">
+                  {rest.map((figure) => (
+                    <div class="spec__row">
+                      <dt>{figure.label}</dt>
+                      <dd>
+                        {figure.value} {figure.unit}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+                <ul class="ticks">
+                  {division.capabilities.slice(0, 4).map((item) => <li>{item}</li>)}
+                </ul>
+                {division.note && <p class="div__note">{division.note}</p>}
+                <a class="link" href={`/products#${division.id}`}>
+                  {division.name} products <Icon name="arrow" />
+                </a>
+              </article>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── Services ───────────── -->
+  <section class="section" id="services" aria-labelledby="services-title">
+    <div class="board">
+      <header class="sect-head">
+        <h2 id="services-title">From concept to a product you can ship</h2>
+        <span class="legend">S1 to S4</span>
+      </header>
+      <p class="lede sect-intro">Four services, in the order a product lives them. Use one, or all of them.</p>
+
+      <ol class="chain">
+        {
+          services.map((service) => (
+            <li class="chain__item">
+              <span class="legend">
+                {service.designator} · {service.step}
+              </span>
+              <h3>{service.name}</h3>
+              <p class="chain__out">{service.output}</p>
+              <a class="link" href={`/services#${service.slug}`}>
+                Details <Icon name="arrow" />
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ───────────── Product bench ───────────── -->
+  <section class="section" id="products" aria-labelledby="products-title">
+    <div class="board">
+      <header class="sect-head">
+        <h2 id="products-title">Take the products apart</h2>
+        <span class="legend">U1 to U14</span>
+      </header>
+      <p class="lede sect-intro">
+        Pick a product, drag the trimmer to open it, and read each specification against the part it describes. Rows marked with a ring
+        point at the model.
+      </p>
+
+      <div class="bench">
+        <div class="bench__list" role="tablist" aria-orientation="vertical" aria-label="Featured products">
+          {
+            featured.map((product, index) => (
+              <button
+                class="bench__item"
+                type="button"
+                role="tab"
+                id={`tab-${product.slug}`}
+                aria-controls={`panel-${product.slug}`}
+                aria-selected={index === 0 ? 'true' : 'false'}
+                tabindex={index === 0 ? 0 : -1}
+                data-bench-tab="home"
+                data-slug={product.slug}
+              >
+                <span class="legend">{product.designator}</span>
+                <span class="bench__name">{product.name}</span>
+              </button>
+            ))
+          }
+        </div>
+
+        <div class="bench__stage">
+          <Stage id="home" configs={benchConfigs} />
+        </div>
+
+        <div class="bench__panels">
+          {
+            featured.map((product, index) => (
+              <div
+                class="bench__panel"
+                role="tabpanel"
+                id={`panel-${product.slug}`}
+                aria-labelledby={`tab-${product.slug}`}
+                data-bench-panel="home"
+                data-slug={product.slug}
+                hidden={index !== 0}
+              >
+                <p class="bench__summary">{product.summary}</p>
+                <Numeral value={product.figure.value} unit={product.figure.unit} caption={product.figure.caption} />
+                <SpecList specs={product.specs} scope={product.slug} limit={8} />
+                <div class="bench__actions">
+                  <Pad href={`/?product=${product.slug}#contact`} size="small" icon="arrow">
+                    Enquire
+                  </Pad>
+                  <a class="link" href={`/products#${product.slug}`}>
+                    Full specification <Icon name="arrow" />
+                  </a>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── Work ───────────── -->
+  <section class="section" id="work" aria-labelledby="work-title">
+    <div class="board">
+      <header class="sect-head">
+        <h2 id="work-title">Work we can describe</h2>
+        <span class="legend">C1 to C4</span>
+      </header>
+
+      <div class="cases">
+        {
+          cases.map((study) => (
+            <article class="case courtyard">
+              <span class="legend courtyard__ref">{study.designator}</span>
+              <p class="legend">{study.domain}</p>
+              <h3>{study.title}</h3>
+              <p>{study.brief}</p>
+              <ul class="ticks">
+                {study.built.map((item) => <li>{item}</li>)}
+              </ul>
+              {study.result && <p class="case__result">Result: {study.result}</p>}
+              <div class="case__links">
+                {study.products.map((slug) => {
+                  const related = productBySlug(slug);
+                  return (
+                    <a class="link" href={`/products#${related.slug}`}>
+                      {related.designator} {related.name} <Icon name="arrow" />
+                    </a>
+                  );
+                })}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+      <p class="nda">Client names are under NDA, so each case says what we built rather than for whom.</p>
+    </div>
+  </section>
+
+  <!-- ───────────── Company (white mask) ───────────── -->
+  <section class="section paper paper-band" id="company" aria-labelledby="company-title">
+    <div class="board">
+      <header class="sect-head">
+        <h2 id="company-title">The people and the practice</h2>
+        <span class="legend">T1 to T3</span>
+      </header>
+
+      <div class="about">
+        <div class="about__body">
+          <p class="lede">{company.description}</p>
+          <div class="about__pair">
+            <h3>Mission</h3>
+            <p>{mission}</p>
+          </div>
+          <div class="about__pair">
+            <h3>Vision</h3>
+            <p>{vision}</p>
+          </div>
+        </div>
+        <dl class="reasons">
+          {
+            reasons.map((reason) => (
+              <div>
+                <dt>{reason.title}</dt>
+                <dd>{reason.body}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+
+      <div class="team">
+        {
+          team.map((member) => (
+            <article class="member">
+              <span class="legend">{member.designator}</span>
+              <Numeral value={member.figure.value} unit={member.figure.unit} />
+              <h3 class="member__name">{member.name}</h3>
+              <p class="member__role">{member.role}</p>
+              <p>{member.note}</p>
+            </article>
+          ))
+        }
+      </div>
+
+      <h3>Design practice aligned to</h3>
+      <dl class="standards">
+        {
+          designRules.map((rule) => (
+            <div>
+              <dt>{rule.code}</dt>
+              <dd>{rule.label}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <!-- ───────────── Insights ───────────── -->
+  <section class="section" id="insights" aria-labelledby="insights-title">
+    <div class="board">
+      <header class="sect-head">
+        <h2 id="insights-title">Short briefs from the bench</h2>
+        <a class="link" href="/insights">All briefs <Icon name="arrow" /></a>
+      </header>
+      <div class="briefs">
+        {
+          briefs.map((brief, index) => (
+            <div class="brief">
+              <span class="legend">B{index + 1}</span>
+              <h3 class="brief__title">
+                <a href={`/insights#${brief.id}`}>{brief.data.title}</a>
+              </h3>
+              <span class="legend">{brief.data.readMinutes} min</span>
+              <p class="brief__summary">{brief.data.summary}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── Contact ───────────── -->
+  <section class="section" id="contact" aria-labelledby="contact-title">
+    <div class="board">
+      <div class="contact">
+        <div>
+          <header class="sect-head">
+            <h2 id="contact-title">Tell us what you are building</h2>
+            <span class="legend">J1</span>
+          </header>
+          <p class="lede">A product to buy or an engineering problem to solve, send the details and an engineer will reply.</p>
+          <dl class="contact__details">
+            <div>
+              <dt class="legend">Phone</dt>
+              <dd><a href={company.phoneHref}>{company.phone}</a></dd>
+            </div>
+            <div>
+              <dt class="legend">Email</dt>
+              <dd><a href={`mailto:${company.email}`}>{company.email}</a></dd>
+            </div>
+            <div>
+              <dt class="legend">Address</dt>
+              <dd>{company.address.lines.join(', ')}</dd>
+            </div>
+          </dl>
+          <div class="contact__social">
+            {company.social.map((item) => <a class="link" href={item.href} target="_blank" rel="noopener">{item.label}</a>)}
+          </div>
+        </div>
+
+        <div class="panel paper">
+          <span class="hole hole--tl"></span><span class="hole hole--tr"></span>
+          <span class="hole hole--bl"></span><span class="hole hole--br"></span>
+          <ContactForm />
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  import '~/scripts/stage';
+  import '~/scripts/traces';
+</script>

@@ -1,0 +1,154 @@
+---
+import { Image } from 'astro:assets';
+import Base from '~/layouts/Base.astro';
+import Pad from '~/components/Pad.astro';
+import Icon from '~/components/Icon.astro';
+import Stage from '~/components/Stage.astro';
+import Numeral from '~/components/Numeral.astro';
+import SpecList from '~/components/SpecList.astro';
+import { benchConfig } from '~/lib/bench';
+import { company } from '~/data/company';
+import { divisions } from '~/data/divisions';
+import { products, productsIn } from '~/data/products';
+
+const configs = await Promise.all(products.map((product) => benchConfig(product)));
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `${company.name} products`,
+    itemListElement: products.map((product, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Product',
+        name: product.name,
+        description: product.summary,
+        category: divisions.find((division) => division.id === product.division)?.name,
+        brand: { '@type': 'Brand', name: company.short },
+        url: `${company.url}/products#${product.slug}`,
+      },
+    })),
+  },
+];
+---
+
+<Base
+  title="Products"
+  description="Medical imaging software and systems, industrial motor protection and embedded computing, and agricultural motor starters from IG Drives & Systems."
+  jsonLd={jsonLd}
+>
+  <div class="board">
+    <header class="page-head">
+      <h1>Products</h1>
+      <p class="lede">
+        Fourteen products in three divisions. The model beside each list is a representative stand-in, so you can see how the product
+        is built. Rows marked with a ring point at the part they describe.
+      </p>
+    </header>
+
+    <nav class="jump" aria-label="Divisions">
+      {
+        divisions.map((division) => (
+          <a class="link" href={`#${division.id}`}>
+            {division.name} <Icon name="arrow" />
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="catalog">
+      <div class="catalog__stage">
+        <div class="stage-follow">
+          <Stage id="catalog" configs={configs} follow tall />
+        </div>
+      </div>
+
+      <div class="catalog__list">
+        {
+          divisions.map((division) => (
+            <section class="division" id={division.id} aria-labelledby={`${division.id}-title`}>
+              <div class="division__intro">
+                <header class="sect-head">
+                  <h2 id={`${division.id}-title`}>{division.name}</h2>
+                  <span class="legend">{division.designator}</span>
+                </header>
+                <p class="lede">{division.line}</p>
+                {division.protections && (
+                  <div>
+                    <h3 class="legend">Protections across the range</h3>
+                    <ul class="ticks cols-3">
+                      {division.protections.map((item) => <li>{item}</li>)}
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              {productsIn(division.id).map((product) => (
+                <article class="product" id={product.slug} data-product-section data-slug={product.slug}>
+                  <header class="product__head">
+                    <h3>{product.name}</h3>
+                    <span class="legend">
+                      {product.designator} · {product.kind}
+                    </span>
+                  </header>
+                  <p class="product__summary">{product.summary}</p>
+                  <Numeral value={product.figure.value} unit={product.figure.unit} caption={product.figure.caption} />
+                  <SpecList specs={product.specs} scope={product.slug} />
+
+                  {(product.features || product.applications) && (
+                    <div class="product__lists">
+                      {product.features && (
+                        <div>
+                          <h4>Features</h4>
+                          <ul class="ticks">
+                            {product.features.map((item) => <li>{item}</li>)}
+                          </ul>
+                        </div>
+                      )}
+                      {product.applications && (
+                        <div>
+                          <h4>Applications</h4>
+                          <ul class="ticks">
+                            {product.applications.map((item) => <li>{item}</li>)}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {product.protections && (
+                    <div>
+                      <h4>Protections</h4>
+                      <ul class="ticks cols-3">
+                        {product.protections.map((item) => <li>{item}</li>)}
+                      </ul>
+                    </div>
+                  )}
+
+                  {product.model && product.photo && (
+                    <figure class="product__photo">
+                      <Image src={product.photo.src} alt={product.photo.alt} width={680} loading="lazy" />
+                      <figcaption class="legend">Photograph of the product</figcaption>
+                    </figure>
+                  )}
+
+                  <div class="bench__actions">
+                    <Pad href={`/?product=${product.slug}#contact`} size="small" icon="arrow" aria-label={`Enquire about ${product.name}`}>
+                      Enquire
+                    </Pad>
+                  </div>
+                </article>
+              ))}
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script>
+  import '~/scripts/stage';
+</script>

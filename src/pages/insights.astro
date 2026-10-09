@@ -1,0 +1,59 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '~/layouts/Base.astro';
+import Pad from '~/components/Pad.astro';
+
+const entries = (await getCollection('insights')).sort((a, b) => a.data.order - b.data.order);
+const rendered = await Promise.all(entries.map(async (entry) => ({ entry, Content: (await render(entry)).Content })));
+---
+
+<Base
+  title="Insights"
+  description="Short engineering briefs on medical software, DICOM, mammography, MRI safety and motor starters, from the IGDS team."
+  surface="paper"
+>
+  <div class="board">
+    <header class="page-head">
+      <h1>Short briefs from the bench</h1>
+      <p class="lede">Eight two-minute reads on the problems behind our products.</p>
+    </header>
+
+    <nav aria-label="All briefs">
+      <div class="briefs">
+        {
+          entries.map((entry, index) => (
+            <div class="brief">
+              <span class="legend">B{index + 1}</span>
+              <h2 class="brief__title" style="font-size: var(--step-0)">
+                <a href={`#${entry.id}`}>{entry.data.title}</a>
+              </h2>
+              <span class="legend">{entry.data.sector}</span>
+              <p class="brief__summary">{entry.data.summary}</p>
+            </div>
+          ))
+        }
+      </div>
+    </nav>
+
+    {
+      rendered.map(({ entry, Content }, index) => (
+        <article class="article" id={entry.id} aria-labelledby={`${entry.id}-title`}>
+          <div class="article__meta">
+            <span class="legend">B{index + 1}</span>
+            <span class="legend">{entry.data.sector}</span>
+            <span class="legend">{entry.data.readMinutes} min read</span>
+          </div>
+          <h2 id={`${entry.id}-title`}>{entry.data.title}</h2>
+          <div class="prose">
+            <Content />
+          </div>
+        </article>
+      ))
+    }
+
+    <div class="article">
+      <p class="lede">Have a question these briefs do not answer?</p>
+      <div><Pad href="/#contact" icon="arrow">Ask an engineer</Pad></div>
+    </div>
+  </div>
+</Base>

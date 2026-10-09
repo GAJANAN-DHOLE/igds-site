@@ -1,0 +1,196 @@
+---
+import { Image } from 'astro:assets';
+import lockup from '~/assets/brand/igds-lockup.png';
+import { company, designRules } from '~/data/company';
+import { divisions } from '~/data/divisions';
+import Icon from './Icon.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="board">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <span class="site-footer__label">
+          <Image src={lockup} alt={`${company.name}. ${company.tagline}.`} width={220} height={151} loading="lazy" />
+        </span>
+        <address>
+          <p>
+            {company.address.lines[0]}<br />
+            {company.address.lines[1]}
+          </p>
+          <p>
+            <a class="legend" href={company.phoneHref}>{company.phone}</a><br />
+            <a class="legend" href={`mailto:${company.email}`}>{company.email}</a>
+          </p>
+        </address>
+      </div>
+
+      <nav aria-label="Products by division">
+        <h2 class="site-footer__title">Products</h2>
+        <ul>
+          {
+            divisions.map((division) => (
+              <li>
+                <a href={`/products#${division.id}`}>{division.name}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <nav aria-label="Company">
+        <h2 class="site-footer__title">Company</h2>
+        <ul>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/#work">Work</a></li>
+          <li><a href="/#company">About</a></li>
+          <li><a href="/insights">Insights</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Legal and social">
+        <h2 class="site-footer__title">Follow</h2>
+        <ul>
+          {
+            company.social.map((item) => (
+              <li>
+                <a href={item.href} target="_blank" rel="noopener">
+                  {item.label}
+                  <Icon name="arrow-up-right" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-footer__notes">
+      <h2 class="legend">Fabrication notes</h2>
+      <ul class="ticks">
+        <li>Designed and built in Pune, India.</li>
+        <li>
+          Processes aligned to {designRules.map((rule) => rule.code).join(', ')}. Alignment is a design practice, not a
+          certification.
+        </li>
+        <li>3D models are representative illustrations. Written specifications apply.</li>
+        <li>Client names are held under NDA.</li>
+      </ul>
+    </div>
+
+    <div class="site-footer__base">
+      <p class="legend">© {year} IG Drives and Systems</p>
+      <p class="legend"><a href="/legal#privacy">Privacy</a> · <a href="/legal#terms">Terms</a></p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    position: relative;
+    padding-block: var(--s-8) var(--s-6);
+    background: var(--mask-900);
+    border-top: 1px solid var(--silk-rule-strong);
+  }
+
+  .site-footer__grid {
+    display: grid;
+    gap: var(--s-7) var(--s-6);
+    grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr));
+    padding-bottom: var(--s-7);
+  }
+
+  .site-footer__label {
+    display: block;
+    width: 11rem;
+    padding: 0.6rem 0.8rem;
+    background: #fff;
+    margin-bottom: var(--s-5);
+  }
+
+  address {
+    font-style: normal;
+    display: grid;
+    gap: var(--s-3);
+  }
+
+  address p {
+    color: var(--silk-2);
+  }
+
+  address a {
+    color: var(--silk);
+    text-decoration: none;
+    font-size: var(--step--1);
+  }
+
+  .site-footer__title {
+    font-family: var(--mono);
+    font-size: var(--step--2);
+    font-weight: 500;
+    font-stretch: 100%;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.3;
+    color: var(--silk-3);
+    margin-bottom: var(--s-4);
+  }
+
+  nav ul {
+    display: grid;
+    gap: var(--s-3);
+  }
+
+  nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    color: var(--silk);
+    text-decoration-color: transparent;
+  }
+
+  nav a:hover {
+    text-decoration-color: currentColor;
+  }
+
+  nav a :global(.icon) {
+    width: 0.9em;
+    height: 0.9em;
+    color: var(--gold);
+  }
+
+  .site-footer__notes {
+    display: grid;
+    gap: var(--s-4);
+    padding-block: var(--s-6);
+    border-top: 1px solid var(--silk-rule);
+    color: var(--silk-2);
+    font-size: var(--step--1);
+  }
+
+  .site-footer__base {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--s-3);
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--silk-rule);
+  }
+
+  .site-footer__base a {
+    color: var(--silk);
+  }
+
+  @media (max-width: 62rem) {
+    .site-footer__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .site-footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

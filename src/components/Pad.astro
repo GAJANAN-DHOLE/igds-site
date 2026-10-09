@@ -1,0 +1,32 @@
+---
+import Icon from './Icon.astro';
+import type { IconName } from './Icon.astro';
+
+interface Props {
+  href?: string;
+  variant?: 'solid' | 'ghost';
+  size?: 'default' | 'small';
+  icon?: IconName;
+  type?: 'button' | 'submit';
+  class?: string;
+  [attr: string]: unknown;
+}
+
+const { href, variant = 'solid', size = 'default', icon, type = 'button', class: className, ...rest } = Astro.props;
+const classes = ['pad', variant === 'ghost' && 'pad--ghost', size === 'small' && 'pad--small', className];
+const external = href?.startsWith('http');
+---
+
+{
+  href ? (
+    <a class:list={classes} href={href} {...(external ? { target: '_blank', rel: 'noopener' } : {})} {...rest}>
+      <slot />
+      {icon && <Icon name={icon} />}
+    </a>
+  ) : (
+    <button class:list={classes} type={type} {...rest}>
+      <slot />
+      {icon && <Icon name={icon} />}
+    </button>
+  )
+}
